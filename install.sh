@@ -149,7 +149,7 @@ if [ ! -d "$HOME/.rbenv" ]; then
     echo "Installing rbenv for the first time"
 
     curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.15.0/install.sh | sudo -E bash -
-    source ~/.nvm/nvm.sh
+    source $HOME/.nvm/nvm.sh
     nvm install 0.10
     #sudo apt-get install -y nodejs
 
