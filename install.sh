@@ -170,7 +170,23 @@ if [ ! -d "$HOME/.rbenv" ]; then
     rbenv rehash
 fi
 
+#DOCKER
+curl -fsSL https://get.docker.com/ | sh
+curl -fsSL https://get.docker.com/gpg | sudo apt-key add -
+sudo usermod -aG docker ubuntu
+#sudo apt-get -y install apt-transport-https ca-certificates
+#sudo apt-key -y adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+#sudo apt-get -y update
+#sudo apt-get -y purge lxc-docker
+#sudo apt-cache -y policy docker-engine
+#sudo apt-get -y update
+#sudo apt-get -y install linux-image-extra-$(uname -r)
+#sudo apt-get -y install apparmor
+#sudo apt-get -y install docker-engine
+#sudo service docker start
 
+sudo sh -c "curl -sL https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
+sudo chmod +x /usr/local/bin/docker-compose
 
 echo ''
 echo '  All installed!'
