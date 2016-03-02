@@ -117,8 +117,20 @@ install_dotfiles () {
   link_file $DOTFILES_ROOT/bashrc $HOME/.bashrc
 }
 
-sudo apt-get -y update
+if [ ! -d "$HOME/.dotfiles" ]; then
+    echo "Installing dotfiles for the first time"
+    git clone --depth=1 https://github.com/dairan-synergy/dotfiles.git "$HOME/.dotfiles"
+    #cd "$HOME/.yadr"
+    #[ "$1" = "ask" ] && export ASK="true"
+    #rake install
+else
+    echo "dotfiles is already installed"
+    exit 0
+fi
+
+sudo apt-get update -qq
 sudo apt-get -y upgrade
+sudo apt-get -y autoremove
 
 sudo apt-get install -y git git-core curl
 
@@ -131,27 +143,33 @@ sudo apt-get install -y postgresql libpq-dev
 #INSTALAÇÃO RUBY ON RAILS
 #https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-ubuntu-14-04
 #https://gorails.com/setup/ubuntu/14.10
-sudo apt-get install -y zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev
+sudo apt-get install -y zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt1-dev libcurl4-openssl-dev libffi-dev apt-utils
 
-cd
-git clone git://github.com/sstephenson/rbenv.git .rbenv
-git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+if [ ! -d "$HOME/.rbenv" ]; then
+    echo "Installing rbenv for the first time"
 
-install_dotfiles
-exec $SHELL
+    curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.15.0/install.sh | sudo -E bash -
+    source ~/.nvm/nvm.sh
+    nvm install 0.10
+    #sudo apt-get install -y nodejs
 
-rbenv install -v 2.3.0
-rbenv global 2.3.0
+    cd
+    git clone git://github.com/sstephenson/rbenv.git .rbenv
+    git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 
-gem install bundler
+    install_dotfiles
+    source $HOME/.bashrc
 
-gem install rails
+    rbenv install -v 2.3.0
+    rbenv global 2.3.0
 
-rbenv rehash
+    gem install bundler
 
-sudo add-apt-repository -y ppa:chris-lea/node.js
-sudo apt-get -y update
-sudo apt-get -y install nodejs
+    gem install rails
+
+    rbenv rehash
+fi
+
 
 
 echo ''
