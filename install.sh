@@ -173,7 +173,7 @@ fi
 #DOCKER
 curl -fsSL https://get.docker.com/ | sh
 curl -fsSL https://get.docker.com/gpg | sudo apt-key add -
-sudo usermod -aG docker ubuntu
+sudo usermod -aG docker ${USER}
 #sudo apt-get -y install apt-transport-https ca-certificates
 #sudo apt-key -y adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 #sudo apt-get -y update
@@ -190,7 +190,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 
 #ATOM
-sudo dpkg -i $(curl -w "%{filename_effective}" -LO $(curl -s https://api.github.com/repos/atom/atom/releases | grep browser_download_url | grep '64[.]deb' | head -n 1 | cut -d '"' -f 4))
+sudo dpkg -i $(curl -w "%{filename_effective}" -LO $(curl -s https://atom.io/download/deb | grep browser_download_url | grep '64[.]deb' | head -n 1 | cut -d '"' -f 4))
 
 echo ''
 echo '  All installed!'
