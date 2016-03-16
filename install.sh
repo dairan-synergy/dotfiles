@@ -132,7 +132,10 @@ sudo apt-get update -qq
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 
+echo "instalar DROPBOX"
+
 sudo apt-get install -y git git-core curl
+sudo apt-get install -y openssh-server htop
 
 
 #INSTALAÇÃO POSTGRES
