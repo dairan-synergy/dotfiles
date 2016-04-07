@@ -133,6 +133,9 @@ sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 
 echo "instalar DROPBOX"
+echo "instalar SKYPE"
+echo "depois de instalar skype:"
+echo "sudo apt-get install sni-qt:i386"
 
 sudo apt-get install -y git git-core curl
 sudo apt-get install -y openssh-server htop
